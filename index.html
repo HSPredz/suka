@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Floating Photo Fun</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #f7b731);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            min-height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .background-emoji {
+            position: absolute;
+            font-size: 5em;
+            opacity: 0.3;
+            animation: floatAround 20s infinite ease-in-out;
+            pointer-events: none;
+        }
+
+        @keyframes floatAround {
+            0%, 100% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+            25% {
+                transform: translate(100px, -50px) rotate(90deg);
+            }
+            50% {
+                transform: translate(-50px, 100px) rotate(180deg);
+            }
+            75% {
+                transform: translate(150px, 50px) rotate(270deg);
+            }
+        }
+
+        .photo-wrapper {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: photoFloat 6s ease-in-out infinite;
+        }
+
+        @keyframes photoFloat {
+            0%, 100% {
+                transform: translate(-50%, -50%) rotate(-5deg);
+            }
+            25% {
+                transform: translate(-48%, -52%) rotate(3deg);
+            }
+            50% {
+                transform: translate(-52%, -48%) rotate(-3deg);
+            }
+            75% {
+                transform: translate(-48%, -52%) rotate(5deg);
+            }
+        }
+
+        .photo-wrapper img {
+            max-width: 700px;
+            max-height: 85vh;
+            border: 10px solid white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+            display: block;
+        }
+
+        .funny-sticker {
+            position: absolute;
+            font-size: 3em;
+            animation: stickerBounce 3s ease-in-out infinite;
+        }
+
+        @keyframes stickerBounce {
+            0%, 100% {
+                transform: scale(1) rotate(0deg);
+            }
+            50% {
+                transform: scale(1.2) rotate(10deg);
+            }
+        }
+
+        .sticker1 {
+            top: -40px;
+            right: -40px;
+            animation-delay: 0s;
+        }
+
+        .sticker2 {
+            bottom: -40px;
+            left: -40px;
+            animation-delay: 1s;
+        }
+
+        .sticker3 {
+            top: 50%;
+            left: -60px;
+            animation-delay: 2s;
+        }
+
+        .sticker4 {
+            top: 50%;
+            right: -60px;
+            animation-delay: 1.5s;
+        }
+
+        @media (max-width: 768px) {
+            .photo-wrapper img {
+                max-width: 90vw;
+            }
+            .background-emoji {
+                font-size: 3em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background floating emojis -->
+    <div class="background-emoji" style="top: 10%; left: 10%; animation-delay: 0s;">😂</div>
+    <div class="background-emoji" style="top: 20%; right: 15%; animation-delay: 2s;">🎉</div>
+    <div class="background-emoji" style="bottom: 20%; left: 20%; animation-delay: 4s;">🔥</div>
+    <div class="background-emoji" style="bottom: 30%; right: 10%; animation-delay: 6s;">⭐</div>
+    <div class="background-emoji" style="top: 50%; left: 5%; animation-delay: 8s;">💯</div>
+    <div class="background-emoji" style="top: 60%; right: 8%; animation-delay: 10s;">😎</div>
+    <div class="background-emoji" style="top: 80%; left: 50%; animation-delay: 12s;">🚀</div>
+    <div class="background-emoji" style="top: 15%; left: 60%; animation-delay: 14s;">✨</div>
+    <div class="background-emoji" style="bottom: 15%; left: 45%; animation-delay: 16s;">🎪</div>
+    <div class="background-emoji" style="top: 40%; right: 30%; animation-delay: 18s;">🎭</div>
+
+    <!-- Main photo with stickers -->
+    <div class="photo-wrapper">
+        <img src="C:\Users\Asad\Downloads\image.jpeg" alt="Epic Photo" id="mainPhoto">
+        <div class="funny-sticker sticker1">🤣</div>
+        <div class="funny-sticker sticker2">👑</div>
+        <div class="funny-sticker sticker3">💥</div>
+        <div class="funny-sticker sticker4">⚡</div>
+    </div>
+
+    <script>
+        // Note: For local file paths to work, you'll need to:
+        // 1. Save this HTML file
+        // 2. Update the image src with the correct filename
+        // 3. Open it directly in your browser
+        
+        const img = document.getElementById('mainPhoto');
+        
+        // Add more random floating emojis
+        const emojis = ['😂', '🤪', '🥳', '🎊', '💫', '🌟', '🎨', '🎸', '🎮', '🍕'];
+        
+        setInterval(() => {
+            const emoji = document.createElement('div');
+            emoji.className = 'background-emoji';
+            emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+            emoji.style.top = Math.random() * 100 + '%';
+            emoji.style.left = Math.random() * 100 + '%';
+            emoji.style.animationDelay = Math.random() * 5 + 's';
+            document.body.appendChild(emoji);
+            
+            setTimeout(() => emoji.remove(), 20000);
+        }, 3000);
+    </script>
+</body>
+</html>
